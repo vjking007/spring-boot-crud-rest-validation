@@ -1,9 +1,11 @@
 package com.vaibhav.user_crud.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "users") // Optional, if you want to specify the table name
@@ -13,18 +15,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment the ID
     private long id;
 
+    @NotBlank(message = "First name is mandatory")
+    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
     @Column(name = "first_name")
     private String firstName;
 
+    @NotBlank(message = "Last name is mandatory")
+    @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
     @Column(name = "last_name")
     private String lastName;
 
+    @NotBlank(message = "Email ID is mandatory")
+    @Email(message = "Email should be valid")
     @Column(name = "email_id", unique = true)
     private String emailId;
 
     @Column(name = "created_at")
     private LocalDate createdAt;
 
+    @NotBlank(message = "Created by is mandatory")
     @Column(name = "created_by")
     private String createdBy;
 
