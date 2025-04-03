@@ -3,6 +3,7 @@ package com.vaibhav.user_crud.controller;
 import com.vaibhav.user_crud.response.UserRequestDTO;
 import com.vaibhav.user_crud.response.UserResponseDTO;
 import com.vaibhav.user_crud.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class UserController {
 
     // Create a new user
     @PostMapping("/save")
-    public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
         UserResponseDTO responseDTO = userService.saveUser(userRequestDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
@@ -44,7 +45,8 @@ public class UserController {
 
     // Update an existing user
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable long id, @RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable long id,
+                                                      @Valid @RequestBody UserRequestDTO userRequestDTO) {
         UserResponseDTO updatedUser = userService.updateUser(id, userRequestDTO);
         return updatedUser != null ? new ResponseEntity<>(updatedUser, HttpStatus.OK)
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
