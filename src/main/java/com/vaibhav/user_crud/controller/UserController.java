@@ -1,6 +1,5 @@
 package com.vaibhav.user_crud.controller;
 
-import com.vaibhav.user_crud.model.User;
 import com.vaibhav.user_crud.response.UserRequestDTO;
 import com.vaibhav.user_crud.response.UserResponseDTO;
 import com.vaibhav.user_crud.service.UserService;
